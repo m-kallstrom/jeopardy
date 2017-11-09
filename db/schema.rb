@@ -21,24 +21,26 @@ ActiveRecord::Schema.define(version: 20171109010347) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "game_boards", force: :cascade do |t|
+  create_table "game_squares", force: :cascade do |t|
     t.bigint "game_id"
-    t.boolean "finished"
-    t.integer "score"
+    t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_game_boards_on_game_id"
+    t.index ["game_id"], name: "index_game_squares_on_game_id"
+    t.index ["question_id"], name: "index_game_squares_on_question_id"
   end
 
   create_table "games", force: :cascade do |t|
     t.bigint "user_id"
+    t.boolean "finished"
+    t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
-    t.bigint "game_board_id"
+    t.bigint "game_square_id"
     t.bigint "category_id"
     t.string "question"
     t.string "correct_answer"
@@ -47,7 +49,7 @@ ActiveRecord::Schema.define(version: 20171109010347) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_questions_on_category_id"
-    t.index ["game_board_id"], name: "index_questions_on_game_board_id"
+    t.index ["game_square_id"], name: "index_questions_on_game_square_id"
   end
 
   create_table "users", force: :cascade do |t|
