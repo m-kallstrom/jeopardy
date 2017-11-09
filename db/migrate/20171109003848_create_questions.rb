@@ -6,7 +6,7 @@ class CreateQuestions < ActiveRecord::Migration[5.1]
       t.string       :question
       t.string       :correct_answer
       t.string       :incorrect_answers
-      t.integer      :points
+      t.string       :difficulty
 
       t.timestamps
     end
