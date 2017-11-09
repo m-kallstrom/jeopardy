@@ -1,7 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+File.open("./db/trivia-questions.txt", "r") do |f|
+  f.each do |line|
+    block = eval(line)
+    # p block[:results]
+    if block != nil
+      block[:results].each do |question|
+          #use regex to strip &quot
+          current_category = Category.find_or_create_by(name: question[:category])
+          current_question = Question.create(difficulty: question[:difficulty], correct_answer: question[:correct_answer], incorrect_answers: question[:incorrect_answers], question: question[:question], category_id: current_category.id)
+      end
+    end
+  end
+end
