@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20171109010347) do
     t.string "question"
     t.string "correct_answer"
     t.string "incorrect_answers"
-    t.integer "points"
+    t.string "difficulty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_questions_on_category_id"
